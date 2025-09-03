@@ -1,0 +1,1 @@
+Playground to play with Scala 3 specific features

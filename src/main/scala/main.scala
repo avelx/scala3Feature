@@ -34,7 +34,7 @@ def main(): Unit = {
   }
 
   val initKeyForValidation = Keys(List("a", "b"), extra = "c")
-  validate(initKeyForValidation)foreach{ validateKeys =>
+  val validationState = validate(initKeyForValidation).foreach{ validateKeys =>
     validateKeys.keys match {
       case head::next => "Not Impl"
     }
