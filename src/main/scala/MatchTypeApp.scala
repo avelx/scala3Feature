@@ -7,6 +7,8 @@ import scala.compiletime.asMatchable
 import scala.compiletime.ops.string.+
 
 object MatchTypeApp {
+
+
   class Person(name: String, age: Int)
   type Last[X <: Tuple] = X match
     case head *: EmptyTuple => head
@@ -27,9 +29,26 @@ object MatchTypeApp {
     case x: Seq[t] => x.head
 
 
+  type Id[T] = T match {case T => T }
+
+  class Tag[Z]
+  object ITag extends Tag[Int]
+  object STag extends Tag[String]
 
   @main
   def main(): Unit = {
+
+    type Unpack[T] = (ITag.type, STag.type) match
+      case (Tag[x], Tag[y]) => (x, y)
+
+    val tag = new Tag[Int]
+    val sTag = STag
+
+//    val x2 = new Unpack[(Tag[Int], Tag[String]){ (tag, sTag)
+//    }
+
+    summon[Unpack[(Tag[Int], Tag[String])] =:= (Int, String)]
+
     println("Data test")
 
     summon[Elem[String] =:= Char]
