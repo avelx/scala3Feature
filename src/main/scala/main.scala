@@ -2,7 +2,7 @@ import language.experimental.modularity
 
 final case class Person(tracked val name: String)
 
-@main
+//@main
 def main(): Unit = {
 
   def f(p: Person): p.name.type =
